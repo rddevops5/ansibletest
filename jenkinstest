@@ -1,5 +1,6 @@
 pipeline {
     agent any
+emailext body: 'Test!!!!!!!!!!', subject: 'starting jenkins', to: 'rautdeepak505@gmail.com'
 
     stages {
         stage('Build') {
