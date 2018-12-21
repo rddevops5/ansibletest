@@ -1,9 +1,10 @@
 pipeline {
     agent any
-    stages {
-    emailext body: 'Test!!!!!!!!!!', subject: 'starting jenkins', to: 'rautdeepak505@gmail.com'
-emailext body: 'Test!!!!!!!!!!', subject: 'starting jenkins', to: 'deepak.raut@tieto.com'
+     emailext body: 'Test!!!!!!!!!!', subject: 'starting jenkins', to: 'rautdeepak505@gmail.com'
+     emailext body: 'Test!!!!!!!!!!', subject: 'starting jenkins', to: 'deepak.raut@tieto.com'
 
+    stages {
+   
         stage('Build') {
             steps {
                 echo 'Building..'
