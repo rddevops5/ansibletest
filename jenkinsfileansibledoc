@@ -19,10 +19,10 @@ node() {
                                              stage('Test ANSIBLE VERSION') {
                 withEnv(["ANSIBLE_HOST_KEY_CHECKING=False", "ANSIBLE_CONFIG=${basedir}/ansible/ansible.cfg"]) {
                                                                                           ansiblePlaybook(
-                                                                                                         playbook: "${basedir}/ansible/deploy.yml",
-                                                                                                         inventory: "${basedir}/ansible/inventory",
-                                                                                                         credentialsId: "myjenkins",
-                                                                                                         extras: '-vv'
+                                                                                                    //     playbook: "${basedir}/ansible/deploy.yml",
+                                                                                                      //   inventory: "${basedir}/ansible/inventory",
+                                                                                                       //  credentialsId: "myjenkins",
+                                                                                                         //extras: '-vv'
                                                                                           )
                 }
             }
