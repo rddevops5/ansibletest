@@ -1,0 +1,33 @@
+#!/usr/bin/env groovy
+
+final String REGISTRY_URL = "https://fs-pcm-docker.maven.etb.tieto.com"
+final String REGISTRY_CREDENTIALS = "artifactory-uploader"
+final String ANSIBLEIMAGE = "fs-pcm-docker.maven.etb.tieto.com/tieto/pcm-ansible:latest"
+final String basedir = "/root/.jenkins/workspace/Test_Pipeline"
+
+node() {
+    docker.withRegistry(REGISTRY_URL, REGISTRY_CREDENTIALS) {
+
+        def img = docker.image(ANSIBLEIMAGE)
+        img.inside() { c->
+               
+                                             stage('Prepare') {
+                                                            deleteDir()
+                                                            checkout scm
+                                             }
+                                             
+                                             stage('Test ANSIBLE VERSION') {
+                withEnv(["ANSIBLE_HOST_KEY_CHECKING=False", "ANSIBLE_CONFIG=${basedir}/ansible/ansible.cfg"]) {
+                                                                                          ansiblePlaybook(
+                                                                                                         playbook: "${basedir}/ansible/deploy.yml",
+                                                                                                         inventory: "${basedir}/ansible/inventory",
+                                                                                                         credentialsId: "myjenkins",
+                                                                                                         extras: '-vv'
+                                                                                          )
+                }
+            }
+
+        }
+
+    }
+}
